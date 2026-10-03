@@ -25,7 +25,7 @@ The driver resolves the aliases in the following tables only in [ADO format](con
 | `connection timeout` | - | `0` | Timeout in seconds for the login exchange. `0` applies no timeout to the login exchange, but the initial network connection is bounded separately by `dial timeout`. Prefer Go contexts for connection and query timeouts. For [Azure SQL Database serverless](/azure/azure-sql/database/serverless-tier-overview) with auto-pause enabled, the first connection to a paused database fails with error 40613 while the database resumes. Add retry logic rather than a longer timeout. Databases generally resume in less than one minute. For more information, see [Auto-pause and auto-resume](/azure/azure-sql/database/serverless-tier-auto-pause-resume). |
 | `dial timeout` | - | `15 x protocol count` | Network dial timeout in seconds. `0` applies the default of 15 seconds per registered protocol rather than waiting indefinitely. |
 | `encrypt` | - | `false` | Encryption mode. Azure SQL always requires encryption server-side. See [Encryption and certificates](encryption-certificates.md). |
-| `app name` | - | - | Application name sent in the login record. |
+| `app name` | - | `go-mssqldb` | Application name sent in the login record. |
 | `authenticator` | - | - | Custom authenticator registered by external packages such as `azuread`. |
 
 ## Server and port
@@ -68,7 +68,7 @@ When the primary server is unreachable, the driver attempts to connect to the fa
 
 | Parameter | Default | Description |
 | --- | --- | --- |
-| `Workstation ID` | - | Workstation name sent in the login record. |
+| `Workstation ID` | Client host name | Workstation name sent in the login record. |
 | `ServerSPN` | - | Service Principal Name for the SQL Server. Required only in non-default SPN configurations. |
 
 ## Protocol
