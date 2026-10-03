@@ -118,7 +118,7 @@ For more information, see [Logging and diagnostics](logging-diagnostics.md).
 
 ## uniqueidentifier columns
 
-The driver reads `uniqueidentifier` columns as raw byte arrays by default. To get a standard GUID-formatted string, scan into `mssql.UniqueIdentifier` instead of `string` or `[]byte`. The driver doesn't support automatic GUID conversion through connection parameters.
+The driver reads `uniqueidentifier` columns as raw byte arrays by default. To get a standard GUID-formatted string, scan into `mssql.UniqueIdentifier` instead of `string` or `[]byte`. With v1.8.1 and later versions, `guid conversion=true` makes the driver return the bytes in the order that `uuid.UUID` from `github.com/google/uuid` expects. Don't use this setting with `mssql.UniqueIdentifier` or `mssql.NullUniqueIdentifier`, which reorder the bytes again and return the wrong GUID.
 
 ## SessionInitSQL
 
